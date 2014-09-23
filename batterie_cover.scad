@@ -25,12 +25,12 @@ module cover()
   
   axis();
   
-  /*
+ /* 
   color("blue") translate([-20, 0, 40])cube([1.5, 1.5, 10]);
   color("blue") translate([18.5, 0, 40])cube([1.5, 1.5, 10]);
   color("blue") translate([0, 25.8, 40])cube([1.5, 1.5, 10]);
   color("blue") translate([0, -27.3, 40])cube([1.5, 1.5, 10]);
-  */
+  /**/
 }
 
 module cover_plain()
@@ -45,10 +45,12 @@ module cover_void()
   //translate([0, -50, -3]) cube([50, 50, 50]);
 
   // base removing
-  translate([0, 0, 1.5]) scale([.957, .97, 1.1]) form();
+  *translate([0, 0, 1.5]) scale([.957, .97, 1.1]) form();
+  translate([0, 0, 1.5]) scale([.93, .95, 1.1]) form();
   
   // bottom
-  color("red") translate([-21, 0, 104]) rotate([0, 90, 0]) cylinder(r=80, h=5, $fn=fn1);
+  *color("red") translate([-21, 0, 104]) rotate([0, 90, 0]) cylinder(r=80, h=5, $fn=fn1);
+  color("red") translate([-21, 0, 110]) scale([1, 1.1, 1]) rotate([0, 90, 0]) cylinder(r1=86, r2=85.7, h=5, $fn=fn1);
   
   // side
   color("red") difference()
@@ -58,8 +60,8 @@ module cover_void()
   }
   color("orange") hull()
   {
-    translate([17.53, 0, 38.2]) rotate([90, 0, 0]) cylinder(r=1.7, h=55, center=true, $fn=fn1);
-    translate([18.2, 0, 36.89]) rotate([90, 0, 0]) cylinder(r=.8, h=55, center=true, $fn=fn1);
+    translate([16.99, 0, 38.3]) rotate([90, 0, 0]) cylinder(r=1.7, h=55, center=true, $fn=fn1);
+    translate([17.85, 0, 36.65]) rotate([90, 0, 0]) cylinder(r=.8, h=55, center=true, $fn=fn1);
   }
   
   // fix cutting
@@ -122,39 +124,39 @@ module supports()
   for(i=it)
   {
     // bottom
-    hull() translate([-19.3, i*14, -1.8])
+	translate([0, -1, 0]) hull() translate([-19.3, i*14, -1.8])
     {
-      cube([3, 1, .1]);
-      translate([0, 0, 24]) cube([1, 1, 1]);
+      cube([3, 2, .1]);
+      translate([-.3, 0, 25]) cube([1, 2, 1]);
     }
-    hull() translate([-19.3, 0, -1.8])
+    hull() translate([-19.3, -1, -1.8])
     {
-      cube([3, 1, .1]);
-      translate([0, 0, 24]) cube([1, 1, 1]);
+      cube([3, 2, .1]);
+      translate([-.3, 0, 24]) cube([1, 2, 1]);
     }
     
     // top
-    translate([0, 6.5, 0]) hull() translate([16.3, i*6.5, -1.8])
+    translate([0, 6, 0]) hull() translate([16.3, i*7, -1.8])
     {
-      cube([3, 1, 1]);
-      translate([2, 0, 42]) cube([1, 1, 1]);
+      cube([3, 2, 1]);
+      translate([2.4, 0, (i==1)?42.5:44]) cube([1, 2, 1]);
     }
-    hull() translate([16.3, -12, -1.8])
+    hull() translate([16.3, -14, -1.8])
     {
-      cube([3, 1, 1]);
-      translate([2, 0, 42]) cube([1, 1, 1]);
+      cube([3, 2, 1]);
+      translate([2.4, 0, 42.5]) cube([1, 2, 1]);
     }
     
     // sides
     hull() translate([i*6.5, 23.5, -1.8])
     {
-      cube([1, 3, .1]);
-      translate([0, 2, 28]) cube([1, 1, 1]);
+      cube([2, 3, .1]);
+      translate([0, 2.4, (i==-1)?28:31]) cube([2, 1, 1]);
     }    
     hull() translate([i*6.5, -26.5, -1.8])
     {
-      cube([1, 3, .1]);
-      translate([0, 0, 28]) cube([1, 1, 1]);
+      cube([2, 3, .1]);
+      translate([0, -.4, (i==-1)?28:31]) cube([2, 1, 1]);
     } 
     
     // for printing
